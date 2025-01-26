@@ -48,6 +48,11 @@ async def codes(
         'Ether Battery': '<:ether_battery:1333209908253954078>',
         'Ether Plating Agent': '<:ether_plating_agent:1333210164630650972>',
         'Crystallized Plating Agent': '<:crystallized_plating_agent:1333210599466729624>',
+        'Primogem': '<:primogem:1333216755346182154>',
+        'Mora': '<:mora:1333217292334661764>',
+        "Hero's Wit": '<:heros_wit:1333217927230394441>',
+        "Adventurer's Experience": '<:adventurers_experience:1333218374242533447>',
+        'Mystic Enhancement Ore': '<:mystic_enhancement_ore:1333218863248179260>'
     }
 
     # Fetch the codes data
