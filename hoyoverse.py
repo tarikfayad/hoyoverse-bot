@@ -52,7 +52,9 @@ async def codes(
         'Mora': '<:mora:1333217292334661764>',
         "Hero's Wit": '<:heros_wit:1333217927230394441>',
         "Adventurer's Experience": '<:adventurers_experience:1333218374242533447>',
-        'Mystic Enhancement Ore': '<:mystic_enhancement_ore:1333218863248179260>'
+        'Mystic Enhancement Ore': '<:mystic_enhancement_ore:1333218863248179260>',
+        'Stellar Jade': '<:stellar_jade:1333219716390719641>',
+        'Credit': '<:credit:1333220127826772013>'
     }
 
     # Fetch the codes data
