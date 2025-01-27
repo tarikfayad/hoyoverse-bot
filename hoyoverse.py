@@ -1,5 +1,4 @@
 import os
-import re
 import requests
 import nextcord
 from nextcord.ext import commands
@@ -17,7 +16,7 @@ bot = commands.Bot()
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}')
-    await bot.sync_all_application_commands() # Forcing command sync on reboot.
+    await bot.sync_all_application_commands()  # Forcing command sync on reboot.
     print("Slash commands synced!")
 
 @bot.slash_command(description="Retrieve active codes.", guild_ids=[guild_id])
@@ -33,6 +32,12 @@ async def codes(
             'Tears of Themis': 'themis',
             'Zenless Zone Zero': 'zenless'
         }
+    ),
+    pull_currency: bool = SlashOption(
+        name='pull_currency',
+        description='Only show codes including jade/polychromes/primgems/etc.?',
+        required=False,
+        default=False
     )
 ):
     # Mapping of items to their corresponding image URLs
@@ -54,13 +59,23 @@ async def codes(
         "Adventurer's Experience": '<:adventurers_experience:1333218374242533447>',
         'Mystic Enhancement Ore': '<:mystic_enhancement_ore:1333218863248179260>',
         'Stellar Jade': '<:stellar_jade:1333219716390719641>',
-        'Credit': '<:credit:1333220127826772013>'
+        'Credit': '<:credit:1333220127826772013>',
+        "Traveler's Guide": '<:travelers_guide:1333455919119601664>',
+        'Adventure Log': '<:adventure_log:1333456319746932850>'
     }
 
     # Fetch the codes data
     codes_data = await getCodes(game)
     if codes_data and 'active' in codes_data:
         active_codes = codes_data['active']
+
+        # Filter codes if pull_currency is True
+        if pull_currency:
+            currency_items = ['Polychrome', 'Stellar Jade', 'Primogem']
+            active_codes = [
+                entry for entry in active_codes
+                if any(item in reward for reward in entry['rewards'] for item in currency_items)
+            ]
 
         # Process rewards to replace names with image URLs
         processed_rewards = []
@@ -73,12 +88,30 @@ async def codes(
                 formatted_rewards.append(reward)
             processed_rewards.append(f"**{entry['code']}** ({', '.join(formatted_rewards)})")
 
-        # Build and send the message
+        # Break the response into chunks of 2000 characters
         summarized = '\n'.join(processed_rewards)
-        await interaction.send(f'Currently Active Codes:\n{summarized[:2000]}')  # Ensure message length <= 2000
+        chunks = []
+        current_chunk = 'Currently Active Codes:\n'
+        for line in summarized.split('\n'):
+            if len(current_chunk) + len(line) + 1 > 2000:
+                chunks.append(current_chunk)
+                current_chunk = line + '\n'
+            else:
+                current_chunk += line + '\n'
+        if current_chunk:
+            chunks.append(current_chunk)
+
+        # Send each chunk as a separate message
+        if chunks:
+            for i, chunk in enumerate(chunks):
+                if i == 0:
+                    await interaction.send(chunk)
+                else:
+                    await interaction.followup.send(chunk)  # Use followup for additional messages
+        else:
+            await interaction.send('No active codes found matching the criteria.')
     else:
         await interaction.send('No active codes found or an error occurred.')
-    
 
 async def getCodes(game: str):
     response = requests.get(f'{api_url}/{game}/codes')
