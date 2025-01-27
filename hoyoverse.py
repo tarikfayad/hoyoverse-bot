@@ -62,14 +62,14 @@ async def codes(
         'Credit': '<:credit:1333220127826772013>',
         "Traveler's Guide": '<:travelers_guide:1333455919119601664>',
         'Adventure Log': '<:adventure_log:1333456319746932850>',
-        # 'Bottled Soda': '<:bottled_soda:1333461270653046835>',
-        # 'Potato Fries Sundae': '<:potato_fries_sundae:1333462632438566955>',
-        # 'Clockie Pizza (Whole)': '<:clockie_pizza:1333463036589244477>',
-        # 'Golden Slumbernana': '<:golden_slumbernana:1333463740753903699>',
         'Lost Gold Fragment': '<:lost_gold_fragment:1333464258272428174>',
         'Refined Aether': '<:refined_aether:1333464643691090000>',
-        # 'Automatic Wooden Dummy': '<:automatic_wooden_dummy:1333465283171713126>',
-        # 'Alfafa Salad': '<:alfalfa_salad:1333465671727841341>'
+        'S-Chip': '<:schip:1333467186253139968>',
+        'Stellin': '<:stellin:1333467441459888193>',
+        'Crystals': '<:crystals:1333467986811424769>',
+        'Coins': '<:coins:1333468641597067359>',
+        'Asterite': '<:asterite:1333468971630071892>',
+        'Advanced Skill Material': '<:advanced_skill_material:1333477174870671433>'
     }
 
     # Fetch the codes data
