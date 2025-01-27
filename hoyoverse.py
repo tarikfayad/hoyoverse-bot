@@ -61,7 +61,15 @@ async def codes(
         'Stellar Jade': '<:stellar_jade:1333219716390719641>',
         'Credit': '<:credit:1333220127826772013>',
         "Traveler's Guide": '<:travelers_guide:1333455919119601664>',
-        'Adventure Log': '<:adventure_log:1333456319746932850>'
+        'Adventure Log': '<:adventure_log:1333456319746932850>',
+        # 'Bottled Soda': '<:bottled_soda:1333461270653046835>',
+        # 'Potato Fries Sundae': '<:potato_fries_sundae:1333462632438566955>',
+        # 'Clockie Pizza (Whole)': '<:clockie_pizza:1333463036589244477>',
+        # 'Golden Slumbernana': '<:golden_slumbernana:1333463740753903699>',
+        'Lost Gold Fragment': '<:lost_gold_fragment:1333464258272428174>',
+        'Refined Aether': '<:refined_aether:1333464643691090000>',
+        # 'Automatic Wooden Dummy': '<:automatic_wooden_dummy:1333465283171713126>',
+        # 'Alfafa Salad': '<:alfalfa_salad:1333465671727841341>'
     }
 
     # Fetch the codes data
@@ -71,7 +79,7 @@ async def codes(
 
         # Filter codes if pull_currency is True
         if pull_currency:
-            currency_items = ['Polychrome', 'Stellar Jade', 'Primogem']
+            currency_items = ['Polychrome', 'Stellar Jade', 'Primogem', 'S-Chip', 'Crystals']
             active_codes = [
                 entry for entry in active_codes
                 if any(item in reward for reward in entry['rewards'] for item in currency_items)
